@@ -16,7 +16,8 @@ const NAV = [
   { i: 2, label: 'Keahlian' },
   { i: 4, label: 'Proyek' },
   { i: 5, label: 'Sertifikat' },
-  { i: 6, label: 'Kontak' },
+  { i: 6, label: 'Catatan' },
+  { i: 7, label: 'Kontak' },
 ];
 
 export default function Navbar({

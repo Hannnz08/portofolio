@@ -20,6 +20,7 @@ import Skills from './slides/Skills';
 import Experience from './slides/Experience';
 import Projects from './slides/Projects';
 import Certificates from './slides/Certificates';
+import Notes from './slides/Notes';
 import Contact from './slides/Contact';
 
 export default function Deck() {
@@ -132,7 +133,10 @@ export default function Deck() {
         <Slide id="certificates" index={5}>
           <Certificates />
         </Slide>
-        <Slide id="contact" index={6}>
+        <Slide id="notes" index={6}>
+          <Notes />
+        </Slide>
+        <Slide id="contact" index={7}>
           <Contact />
         </Slide>
       </main>

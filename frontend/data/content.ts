@@ -206,7 +206,69 @@ export const contact = {
   formspreeEndpoint: '', // contoh: 'https://formspree.io/f/xxxxxxx'
 };
 
+// ---------- Logo teknologi (marquee berjalan di slide Keahlian) ----------
+// label = nama yang tampil. Tambah/kurangi sesukanya.
+export const techMarquee: string[] = [
+  'MikroTik',
+  'Cisco',
+  'GNS3',
+  'Winbox',
+  'RouterOS',
+  'VMware',
+  'VirtualBox',
+  'Packet Tracer',
+  'ESP32',
+  'Arduino',
+  'OSPF',
+  'Hotspot',
+];
+
+// ---------- CATATAN / BLOG (konfigurasi jaringan singkat) ----------
+export type Note = {
+  id: string;
+  title: string;
+  tag: string;
+  code: string; // cuplikan konfigurasi (RouterOS/CLI)
+  description: string; // penjelasan singkat
+};
+
+export const notes: Note[] = [
+  {
+    id: 'dhcp-relay',
+    title: 'DHCP Server & Relay',
+    tag: 'MikroTik',
+    code: `/ip dhcp-server setup\n/ip dhcp-relay add \\\n  name=relay1 interface=vlan10 \\\n  dhcp-server=10.0.0.1 local-address=192.168.10.1`,
+    description:
+      'Menyediakan IP otomatis untuk klien dan meneruskan permintaan DHCP antar-segmen VLAN memakai DHCP Relay.',
+  },
+  {
+    id: 'vlan-bridge',
+    title: 'VLAN & Bridge',
+    tag: 'Switching',
+    code: `/interface bridge add name=bridge1 vlan-filtering=yes\n/interface bridge vlan \\\n  add bridge=bridge1 tagged=ether1 vlan-ids=10,20`,
+    description:
+      'Memisahkan jaringan secara logis dengan VLAN di atas bridge agar lalu lintas antar-divisi terisolasi.',
+  },
+  {
+    id: 'firewall',
+    title: 'Firewall Dasar',
+    tag: 'Security',
+    code: `/ip firewall filter\nadd chain=input action=accept connection-state=established,related\nadd chain=input action=drop in-interface=ether1`,
+    description:
+      'Melindungi router: izinkan koneksi yang sudah terbentuk, lalu blokir akses tak dikenal dari arah WAN.',
+  },
+  {
+    id: 'ospf',
+    title: 'Routing OSPF',
+    tag: 'Routing',
+    code: `/routing ospf instance add name=default router-id=1.1.1.1\n/routing ospf area add name=backbone area-id=0.0.0.0\n/routing ospf interface-template \\\n  add networks=192.168.0.0/24 area=backbone`,
+    description:
+      'Membangun rute dinamis antar-router secara otomatis sehingga jaringan tetap terhubung saat topologi berubah.',
+  },
+];
+
 // ---------- Navigasi slide ----------
+// PENTING: urutan di sini harus sama dengan urutan slide di components/Deck.tsx
 export const slides = [
   { id: 'hero', label: 'Sampul' },
   { id: 'about', label: 'Tentang' },
@@ -214,5 +276,6 @@ export const slides = [
   { id: 'experience', label: 'Pengalaman' },
   { id: 'projects', label: 'Proyek' },
   { id: 'certificates', label: 'Sertifikat' },
+  { id: 'notes', label: 'Catatan' },
   { id: 'contact', label: 'Kontak' },
 ];

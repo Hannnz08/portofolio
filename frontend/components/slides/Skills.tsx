@@ -7,6 +7,7 @@
 
 import { skills } from '@/data/content';
 import { Reveal } from '../motion';
+import Marquee from '../Marquee';
 
 export default function Skills() {
   return (
@@ -44,6 +45,13 @@ export default function Skills() {
           </Reveal>
         ))}
       </div>
+
+      {/* Marquee logo teknologi berjalan */}
+      <Reveal delay={0.3}>
+        <div className="mt-12">
+          <Marquee />
+        </div>
+      </Reveal>
     </div>
   );
 }
