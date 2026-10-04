@@ -1,34 +1,30 @@
 [
   {
-    "content": "Setup Next.js 15 project (TS, Tailwind, Framer Motion) replacing CRA in /app/frontend",
-    "status": "completed"
+    "content": "Update data/content.ts: tipe Certificate baru (images[], details, topics), 3 sertifikat asli, data idCard",
+    "status": "in_progress"
   },
   {
-    "content": "Create data/content.ts with all text, projects, certificates (Indonesian, easy to edit)",
-    "status": "completed"
+    "content": "Buat components/CertificateFlip.tsx (flip 3D, F key, swipe, indikator, aria-live, reduced-motion crossfade)",
+    "status": "pending"
   },
   {
-    "content": "Build core layout: scroll-snap container, SlideNav dots, ScrollProgress, dark/light theme toggle",
-    "status": "completed"
+    "content": "Perbarui Certificates.tsx & Lightbox.tsx memakai CertificateFlip + ringkasan materi",
+    "status": "pending"
   },
   {
-    "content": "Build slides: Hero, About, Skills, Experience, Projects, Certificates, Contact",
-    "status": "completed"
+    "content": "Buat components/IdCard.tsx (lanyard, pendulum physics, drag, tilt, glare, flip, idle sway, device orientation, a11y)",
+    "status": "pending"
   },
   {
-    "content": "Build Lightbox (layoutId, prev/next, Esc, focus trap) + ProjectCard expand",
-    "status": "completed"
+    "content": "Integrasikan IdCard ke About.tsx",
+    "status": "pending"
   },
   {
-    "content": "Add placeholder images, assets folders, SEO/OG metadata, favicon, sitemap",
-    "status": "completed"
+    "content": "Update README (ganti foto, ganti/tambah sertifikat 1-2 halaman)",
+    "status": "pending"
   },
   {
-    "content": "Verify preview renders, responsive mobile/desktop, reduced-motion",
-    "status": "completed"
-  },
-  {
-    "content": "Test end-to-end with testing agent (100% pass) + provide deploy instructions & fill-in list",
-    "status": "completed"
+    "content": "Lint, screenshot desktop+mobile, testing agent",
+    "status": "pending"
   }
 ]

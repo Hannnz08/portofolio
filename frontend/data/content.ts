@@ -22,10 +22,21 @@ export type Certificate = {
   id: string;
   title: string;
   issuer: string;
-  year: string;
-  image: string; // path gambar di /public
+  date: string; // tanggal/tahun terbit yang tampil di kartu
+  /**
+   * 1 atau 2 gambar (path di /public).
+   * - 1 gambar  → tampil biasa, tanpa tombol balik.
+   * - 2 gambar  → [halaman depan, halaman belakang], otomatis dapat efek balik 3D.
+   */
+  images: string[];
+  /** Orientasi file gambar. Default 'landscape' (A4 mendatar). */
+  orientation?: 'landscape' | 'portrait';
   credentialId?: string;
   verifyLink?: string; // tautan verifikasi (opsional)
+  /** Detail tambahan (program, penyelenggara, periode, ...) — tampil di lightbox */
+  details?: { label: string; value: string }[];
+  /** Ringkasan materi — tampil di kartu & lightbox */
+  topics?: string[];
 };
 
 export type SkillGroup = {
@@ -76,12 +87,31 @@ export const about = {
     { label: 'Tempat, Tanggal Lahir', value: 'Magelang, 17 September 2008' },
     { label: 'Domisili', value: 'Sleman, DI Yogyakarta' },
     { label: 'Sekolah', value: 'TJKT · SMK Ma’arif Kota Mungkid' },
-    { label: 'Sertifikasi', value: 'MTCNA' },
+    { label: 'Sertifikasi', value: 'MTCNA · DTA Komdigi · Cisco NetAcad' },
   ],
   stats: [
     { value: '2+', label: 'Router Fisik' },
     { value: 'GNS3', label: 'Lab Virtual' },
-    { value: 'MTCNA', label: 'Tersertifikasi' },
+    { value: '3', label: 'Sertifikat' },
+  ],
+};
+
+// ---------- KARTU TANDA PENGENAL (lanyard di slide Tentang) ----------
+export const idCard = {
+  photo: '/images/profile.svg', // ganti dengan foto Anda, mis. '/images/profile.jpg'
+  name: 'Farhan Rifqi Ramadhani',
+  role: 'Calon Network Engineer',
+  badge: 'MTCNA',
+  location: 'Berbah, Sleman',
+  idNumber: 'TJKT · 2026', // teks kecil dekoratif di bawah kartu
+  // Sisi belakang
+  backTitle: 'Kontak',
+  qrLink: '[https://linkedin.com/in/..]', // tautan tujuan QR (LinkedIn/GitHub)
+  qrLabel: 'Pindai untuk LinkedIn',
+  backContacts: [
+    { label: 'Email', value: '[email@contoh.com]' },
+    { label: 'LinkedIn', value: '[linkedin.com/in/..]' },
+    { label: 'GitHub', value: '[github.com/..]' },
   ],
 };
 
@@ -160,35 +190,60 @@ export const projects: Project[] = [
 ];
 
 // ---------- 6. SERTIFIKAT ----------
+// Cara menambah sertifikat baru:
+//  1) Simpan gambar di public/images/certificates/ (JPG/PNG/WebP).
+//  2) Tambahkan objek baru di array ini.
+//     - Sertifikat 1 halaman → images: ['/images/certificates/nama.jpg']
+//     - Sertifikat 2 halaman → images: ['/images/certificates/nama-1.jpg', '/images/certificates/nama-2.jpg']
+//  3) Jika gambar tegak (portrait), tambahkan orientation: 'portrait'.
 export const certificates: Certificate[] = [
   {
     id: 'mtcna',
     title: 'MTCNA — MikroTik Certified Network Associate',
-    issuer: 'MikroTik',
-    year: '[tahun]', // [isi tahun]
-    image: '/images/certificates/mtcna.svg',
-    credentialId: '[ID]', // [isi ID sertifikat]
-    verifyLink: '', // [isi tautan verifikasi]
+    issuer: 'MikroTik (Mikrotikls SIA, Riga, Latvia)',
+    date: '30 Juni 2026',
+    images: ['/images/certificates/mtcna.jpg'],
+    orientation: 'portrait',
+    credentialId: '2606NA9044',
+    verifyLink: 'https://mikrotik.com/certificates',
+    details: [
+      { label: 'Masa berlaku', value: '3 tahun sejak diterbitkan' },
+      { label: 'Validasi', value: 'mikrotik.com/certificates' },
+    ],
   },
-  // Slot sertifikat tambahan — hapus komentar & isi bila ada:
-  // {
-  //   id: 'sertifikat-2',
-  //   title: '[Sertifikat 2]',
-  //   issuer: '[penerbit]',
-  //   year: '[tahun]',
-  //   image: '/images/certificates/placeholder.svg',
-  //   credentialId: '[ID]',
-  //   verifyLink: '',
-  // },
-  // {
-  //   id: 'sertifikat-3',
-  //   title: '[Sertifikat 3]',
-  //   issuer: '[penerbit]',
-  //   year: '[tahun]',
-  //   image: '/images/certificates/placeholder.svg',
-  //   credentialId: '[ID]',
-  //   verifyLink: '',
-  // },
+  {
+    id: 'dta-intermediate-network-admin',
+    title: 'Intermediate Associate Network Administrator — Nasional',
+    issuer: 'Digital Talent Academy · Komdigi',
+    date: 'Jakarta, 4 Oktober 2026',
+    images: [
+      '/images/certificates/dta-intermediate-1.jpg',
+      '/images/certificates/dta-intermediate-2.jpg',
+    ],
+    credentialId: '21212088840-4127/DTA/BLSDM.Komdigi/2026',
+    verifyLink: '', // [isi tautan dari QR code di sertifikat]
+    details: [
+      { label: 'Program', value: 'Digital Talent Academy — Digital Talent Scholarship 2026' },
+      { label: 'Penyelenggara', value: 'Pusat Pengembangan Talenta Digital, Komdigi' },
+      { label: 'Periode', value: '3 Maret – 31 Desember 2026 · 12 jam pelatihan' },
+    ],
+    topics: [
+      'Merancang Keamanan Jaringan (3 JP)',
+      'Merancang Pemulihan Jaringan (3 JP)',
+      'Mengkonfigurasi Routing Antar Autonomous System (AS) (3 JP)',
+      'Memonitor Keamanan dan Pengaturan Akun Pengguna dalam Jaringan Komputer (3 JP)',
+    ],
+  },
+  {
+    id: 'cisco-networking-basics',
+    title: 'Networking Basics',
+    issuer: 'Cisco Networking Academy',
+    date: '21 Mei 2026',
+    images: ['/images/certificates/cisco-networking-basics.jpg'],
+    credentialId: '9035efa2-14e3-4bee-b797-17f359add78a',
+    verifyLink: '', // [isi tautan verifikasi bila ada]
+    details: [{ label: 'Ditandatangani', value: 'Lynn Bloomer — Director, Cisco Networking Academy' }],
+  },
 ];
 
 // ---------- 7. KONTAK ----------
