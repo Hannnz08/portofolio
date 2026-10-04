@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================
+   TEMA HITAM–PUTIH MINIMALIS (CSS variables)
+   Nilai warna memakai format "R G B" agar bisa dipakai
+   Tailwind dengan opasitas (rgb(var(--bg)/<alpha>)).
+   ========================================================= */
+:root {
+  --bg: 250 250 250;      /* putih bersih */
+  --fg: 10 10 10;         /* teks hampir hitam */
+  --muted: 115 115 115;   /* teks sekunder */
+  --line: 229 229 229;    /* garis/pembatas */
+  --card: 255 255 255;    /* latar kartu */
+  --accent: 10 10 10;     /* aksen = hitam */
+  --grid: 0 0 0;          /* warna grid latar */
+  --grid-opacity: 0.04;
+}
+
+.dark {
+  --bg: 8 8 9;            /* hitam pekat */
+  --fg: 245 245 245;      /* teks hampir putih */
+  --muted: 150 150 155;
+  --line: 38 38 42;
+  --card: 20 20 23;
+  --accent: 245 245 245;  /* aksen = putih */
+  --grid: 255 255 255;
+  --grid-opacity: 0.05;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background: rgb(var(--bg));
+  color: rgb(var(--fg));
+}
+
+body {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Latar grid halus */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(var(--grid) / var(--grid-opacity)) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--grid) / var(--grid-opacity)) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Noise lembut via radial dots */
+.bg-noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: radial-gradient(rgb(var(--grid) / 0.05) 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+/* Scroll-snap: sembunyikan scrollbar pada container deck */
+.deck-scroll {
+  scrollbar-width: none;
+}
+.deck-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Fokus keyboard yang jelas (aksesibilitas) */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid rgb(var(--fg));
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Teks dengan outline (gaya referensi) */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgb(var(--fg) / 0.65);
+}
+
+/* Hormati prefers-reduced-motion: matikan animasi & snap halus */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Utility: judul besar responsif */
+.display-xl {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+}

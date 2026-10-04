@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#ececec"/>
+  <rect x="40" y="40" width="720" height="520" fill="none" stroke="#999" stroke-width="3" stroke-dasharray="10 10"/>
+  <text x="400" y="310" fill="#999" font-family="monospace" font-size="26" text-anchor="middle">SLOT SERTIFIKAT</text>
+</svg>

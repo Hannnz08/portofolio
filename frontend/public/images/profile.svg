@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+  <rect width="600" height="800" fill="#111113"/>
+  <circle cx="300" cy="300" r="130" fill="#1d1d20"/>
+  <circle cx="300" cy="260" r="70" fill="#2a2a2e"/>
+  <path d="M180 520c0-90 54-150 120-150s120 60 120 150z" fill="#2a2a2e"/>
+  <text x="300" y="640" fill="#8a8a90" font-family="monospace" font-size="26" text-anchor="middle">FOTO PROFIL</text>
+  <text x="300" y="680" fill="#55555a" font-family="monospace" font-size="18" text-anchor="middle">ganti: /public/images/profile.jpg</text>
+</svg>
